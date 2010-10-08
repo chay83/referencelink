@@ -38,6 +38,8 @@ jQuery(".replace").each(function(n) {
 	
 	jQuery('#select_all'+ n).live("click",function(){
 		buildSelectionList(options[n], n);
+		jQuery("#ac_value" + n).val(getSelectedValues(options[n]));
+		return false;
 	});
 	
 	if (!multiple[n] && selected[n].length > 0) {
