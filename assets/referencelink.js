@@ -26,15 +26,20 @@ jQuery(".replace").each(function(n) {
 		}
 	});
 	
-	var inputHTML = "<em id='helptext'> (Type for suggestions)</em><input type='text' id='ac_search" + n + "' />";
+	var inputHTML = "<em id='helptext'> (Type for suggestions)</em><input type='text' id='ac_search" + n + "' class='ac_input'/><a id='select_all" + n + "' href='#'>Select All</a>";
 	var submitHTML = "<input type='hidden' name='" + jQuery(".replace").attr("name") + "' id='ac_value" + n + "' value='" + getSelectedValues(selected[n]) + "' />";
 	
 	jQuery(this).after("<ul id='selections" + n + "' class='selection-list'></ul>");
 	if (selected[n].length > 0) {
 		buildSelectionList(selected[n], n);
 	}
-
+	
 	jQuery(this).replaceWith(inputHTML + submitHTML);
+	
+	jQuery('#select_all'+ n).live("click",function(){
+		buildSelectionList(options[n], n);
+	});
+	
 	if (!multiple[n] && selected[n].length > 0) {
 		jQuery("#ac_search" + n).hide();
 		jQuery("#helptext").hide();
